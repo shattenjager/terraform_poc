@@ -1,13 +1,6 @@
-# --- vpc/variables.tf ---
+# --- vpc/outputs.tf ---
 
-variable "az" {
-    type = string
-}
-
-variable "vpc_cider_block" {
-    type = string
-}
-
-variable "subnet_cidr_block" {
-    type = string
-}
+output "subnet_id" {
+    description = "ID of subnet"
+    value       = aws_subnet.instance_subnet.id
+} 

@@ -1,6 +1,12 @@
-# --- vpv/outputs.tf ---
+# --- instance/main/tf ---
 
-output "subnet_id" {
-    description = "ID of subnet"
-    value       = aws_subnet.instance_subnet.id
+resource "aws_instance" "app_server" {
+  ami           = data.aws_ssm_parameter.ec2-ami.value
+  instance_type = var.instance_type
+  subnet_id     = var.subnet_id
+  count         = var.instance_count
+}
+
+data "aws_ssm_paramter" "ec2-ami" {
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
